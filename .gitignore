@@ -1,0 +1,9 @@
+*
+!/.gitignore
+!/scripts
+!/scripts/*.sh
+!/manifest-v2.json
+!/manifest-v3.json
+!/main.js
+!/worker.js
+!/rules.json

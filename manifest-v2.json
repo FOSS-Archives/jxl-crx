@@ -1,0 +1,34 @@
+{
+	"manifest_version": 2,
+	
+	"name": "JPEG XL viewer",
+	"version": "0.2",
+	"description": "Displays JPEG XL images.",
+	
+	"permissions": ["<all_urls>", "declarativeNetRequest"],
+	
+	"content_security_policy": "object-src 'self'; script-src 'self' 'wasm-unsafe-eval'",
+	
+	"content_scripts":
+	[
+		{
+			"matches": ["<all_urls>"],
+			"js": ["main.js"],
+			"run_at": "document_start"
+		}
+	],
+	
+	"web_accessible_resources": ["worker.js", "libjxl.js", "libjxl.wasm"],
+	
+	"declarative_net_request":
+	{
+		"rule_resources":
+		[
+			{
+				"id": "rules",
+				"enabled": true,
+				"path": "rules.json"
+			}
+		]
+	}
+}

@@ -1,0 +1,32 @@
+[
+	{
+		"id": 1,
+		"priority": 1,
+		"action":
+		{
+			"type": "modifyHeaders",
+			"requestHeaders": [{"header": "accept", "operation": "set", "value": "image/jxl,image/svg+xml,image/png,image/jpeg,image/*,*/*"}]
+		},
+		"condition": {"resourceTypes": ["image"]}
+	},
+	{
+		"id": 2,
+		"priority": 1,
+		"action":
+		{
+			"type": "modifyHeaders",
+			"requestHeaders": [{"header": "accept", "operation": "append", "value": "image/jxl"}]
+		},
+		"condition": {"resourceTypes": ["main_frame", "sub_frame"]}
+	},
+	{
+		"id": 3,
+		"priority": 1,
+		"action":
+		{
+			"type": "modifyHeaders",
+			"responseHeaders": [{"header": "content-type", "operation": "set", "value": "image/png"}]
+		},
+		"condition": {"resourceTypes": ["main_frame"], "regexFilter": "^.*\\.jxl(.*)?$"}
+	}
+]
