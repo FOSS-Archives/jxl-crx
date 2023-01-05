@@ -1,5 +1,6 @@
 *
 !/.gitignore
+!/readme.md
 !/scripts
 !/scripts/*.sh
 !/manifest-v2.json
