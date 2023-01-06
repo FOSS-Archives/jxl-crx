@@ -15,6 +15,15 @@ license
 [AGPLv3]: <https://www.gnu.org/licenses/agpl-3.0>
 [GPLv3+]: <https://www.gnu.org/licenses/gpl-faq.html#VersionThreeOrLater>
 
+install
+---
+
+- [**Install from the Chrome Web Store**][Web Store listing]
+- [**Install from Firefox Add-ons**][Firefox Add-ons listing]
+
+[Web Store listing]: <https://chrome.google.com/webstore/detail/jpeg-xl-viewer/bkhdlfmkaenamnlbpdfplekldlnghchp>
+[Firefox Add-ons listing]: <https://addons.mozilla.org/addon/jxl>
+
 build instructions
 ---
 

@@ -10,8 +10,10 @@ let createWorker = () => new Promise(f =>
 	let i = 0
 	worker.addEventListener("message", () =>
 	{
-		let load = async (img, src = img.currentSrc) =>
+		let load = async (img, src) =>
 		{
+			img.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+			
 			let receive = async ({data}) =>
 			{
 				if (data.id !== id) return
@@ -20,6 +22,7 @@ let createWorker = () => new Promise(f =>
 				if (data.error)
 				{
 					dispatchError(img)
+					img.removeAttribute("src")
 					return
 				}
 				
@@ -28,7 +31,7 @@ let createWorker = () => new Promise(f =>
 			
 			let controller = new AbortController()
 			
-			let response = await fetch(src, {signal: controller.signal})
+			let response = await fetch(new URL(src, document.baseURI), {signal: controller.signal})
 			if (!mimeRegex.test(response.headers.get("content-type") ?? "image/jxl"))
 			{
 				// controller.abort()
@@ -48,10 +51,10 @@ let createWorker = () => new Promise(f =>
 	}, {once: true})
 })
 
-let load = img =>
+let load = (img, src = img.currentSrc) =>
 {
-	if (loadJPEGXL) loadJPEGXL[n()](img)
-	else delegated.push(img)
+	if (loadJPEGXL) loadJPEGXL[n()](img,src)
+	else delegated.push([img, src])
 }
 
 let i = -1
@@ -88,7 +91,7 @@ Promise.all(workers)
 	.then(workers =>
 	{
 		loadJPEGXL = workers
-		for (let img of delegated) load(img)
+		for (let [img, src] of delegated) load(img, src)
 		delegated = undefined
 	})
 
@@ -112,5 +115,4 @@ new MutationObserver(mutations =>
 		
 		load(img, node.src || node.srcset)
 	}
-}).observe(document, {subtree: true, childList: true});
-
+}).observe(document, {subtree: true, childList: true})

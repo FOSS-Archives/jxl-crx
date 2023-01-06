@@ -40,5 +40,13 @@
 				"path": "rules.json"
 			}
 		]
+	},
+	
+	"browser_specific_settings":
+	{
+		"gecko":
+		{
+			"id": "jxl@twdb.moe"
+		}
 	}
 }
