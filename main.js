@@ -2,6 +2,8 @@ let blob = new Blob([`importScripts(${JSON.stringify(chrome.runtime.getURL("work
 
 let mimeRegex = /^image\/jxl(\s*;.*)?$/
 
+let headers = {accept: "image/jxl"}
+
 let createWorker = () => new Promise(f =>
 {
 	let worker = new Worker(URL.createObjectURL(blob))
@@ -31,7 +33,7 @@ let createWorker = () => new Promise(f =>
 			
 			let controller = new AbortController()
 			
-			let response = await fetch(new URL(src, document.baseURI), {signal: controller.signal})
+			let response = await fetch(new URL(src, document.baseURI), {signal: controller.signal, headers})
 			if (!mimeRegex.test(response.headers.get("content-type") ?? "image/jxl"))
 			{
 				// controller.abort()
