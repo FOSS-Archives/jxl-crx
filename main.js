@@ -14,6 +14,11 @@ let createWorker = () => new Promise(f =>
 	{
 		let load = async (img, src) =>
 		{
+			// note: if ‘src’ is empty, that might mean this ‘<img>’ element is a placeholder for scripting (very likely)
+			// in any case, the request is likely to fail because the request will be made to the document’s base URL
+			// to avoid interfering with scripting behavior, loading the URL as JPEG XL shouldn’t be tried
+			if (!src) return
+			
 			img.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
 			
 			let receive = async ({data}) =>
